@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributor Locations Across Nepal</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+      
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            gap: 20px;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Map container styles */
+        .map-container {
+            position: relative;
+            flex: 1;
+            height: 600px;
+            background: url('nepalback.png') no-repeat center center;
+            background-size: 600px;
+            
+          
+        }
+
+        .map-marker {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #007bff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, background 0.3s;
+        }
+
+        .map-marker.active {
+            background: #ff5722;
+        }
+
+        .map-marker:hover {
+            transform: scale(1.2);
+        }
+
+        .map-marker span {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .details-container {
+            flex: 1;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .details-container img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .details-container h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .details-container p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .details-container a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .details-container a:hover {
+            text-decoration: underline;
+        }
+
+        .details-container .icon {
+            font-size: 20px;
+            margin-right: 8px;
+        }
+
+        .details-container .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .details-container .buttons a {
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #007bff;
+            transition: background-color 0.3s;
+        }
+
+        .details-container .buttons a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Left Side: Map -->
+    <div class="map-container">
+        <div class="map-marker active" style="top:54%; left: 62%;" data-id="bagmati">
+            <i class="fas fa-map-marker-alt"></i>
+            view
+        </div>
+        <div class="map-marker" style="top: 60%; left: 80%;" data-id="province1">
+            <i class="fas fa-map-marker-alt"></i>
+            view
+        </div>
+        <div class="map-marker" style="top: 67%; left: 62%;" data-id="province2">
+            <i class="fas fa-map-marker-alt"></i>
+            view
+        </div>
+        <div class="map-marker" style="top: 46%; left: 45%;" data-id="gandaki">
+            <i class="fas fa-map-marker-alt"></i>
+            view
+        </div>
+        <div class="map-marker" style="top: 52%; left: 33%;" data-id="lumbini">
+            <i class="fas fa-map-marker-alt"></i>
+            view
+        </div>
+        <div class="map-marker" style="top: 36%; left: 28%;" data-id="karnali">
+            <i class="fas fa-map-marker-alt"></i>
+            view
+        </div>
+        <div class="map-marker" style="top: 34%; left: 12%;" data-id="sudurpaschim">
+            <i class="fas fa-map-marker-alt"></i>
+           view
+        </div>
+    </div>
+    
+
+    <!-- Right Side: Details -->
+    <div class="details-container" id="details">
+        <img src="bagmati.jpg" alt="Bagmati Province">
+        <h2>Bagmati Province</h2>
+        <p><strong>Location:</strong> Kathmandu</p>
+        <p><strong>Contact:</strong> +977-9812345673</p>
+        <p><strong>Email:</strong> bagmati@distributor.com</p>
+
+        <div class="buttons">
+            <a href="https://maps.google.com">View Map</a>
+            <a href="https://wa.me/+9779812345673" target="_blank">
+                <i class="fab fa-whatsapp icon"></i>Chat on WhatsApp</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const detailsData = {
+        province1: {
+            img: "province1.jpg",
+            name: "Province 1",
+            location: "Biratnagar",
+            contact: "+977-9812345671",
+            email: "province1@distributor.com",
+        },
+        province2: {
+            img: "province2.jpg",
+            name: "Province 2",
+            location: "Janakpur",
+            contact: "+977-9812345672",
+            email: "province2@distributor.com",
+        },
+        bagmati: {
+            img: "bagmati.jpg",
+            name: "Bagmati Province",
+            location: "Kathmandu",
+            contact: "+977-9812345673",
+            email: "bagmati@distributor.com",
+        },
+        gandaki: {
+            img: "gandaki.jpg",
+            name: "Gandaki Province",
+            location: "Pokhara",
+            contact: "+977-9812345674",
+            email: "gandaki@distributor.com",
+        },
+        lumbini: {
+            img: "lumbini.jpg",
+            name: "Lumbini Province",
+            location: "Butwal",
+            contact: "+977-9812345675",
+            email: "lumbini@distributor.com",
+        },
+        karnali: {
+            img: "karnali.jpg",
+            name: "Karnali Province",
+            location: "Surkhet",
+            contact: "+977-9812345676",
+            email: "karnali@distributor.com",
+        },
+        sudurpaschim: {
+            img: "sudurpaschim.jpg",
+            name: "Sudurpashchim Province",
+            location: "Dhangadhi",
+            contact: "+977-9812345677",
+            email: "sudurpaschim@distributor.com",
+        },
+    };
+
+    const markers = document.querySelectorAll('.map-marker');
+    const detailsContainer = document.getElementById('details');
+
+    markers.forEach(marker => {
+        marker.addEventListener('click', () => {
+            const id = marker.dataset.id;
+
+            // Update marker styles
+            document.querySelectorAll('.map-marker').forEach(m => m.classList.remove('active'));
+            marker.classList.add('active');
+
+            // Update details
+            const data = detailsData[id];
+            detailsContainer.innerHTML = `
+                <img src="${data.img}" alt="${data.name}">
+                <h2>${data.name}</h2>
+                <p><strong>Location:</strong> ${data.location}</p>
+                <p><strong>Contact:</strong> ${data.contact}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+
+                <div class="buttons">
+                    <a href="https://maps.google.com">View Map</a>
+                    <a href="https://wa.me/${data.contact.replace(/\+/g, '')}" target="_blank">
+                        <i class="fab fa-whatsapp icon"></i>Chat on WhatsApp
+                    </a>
+                </div>
+            `;
+        });
+    });
+</script>
+
+</body>
+</html>

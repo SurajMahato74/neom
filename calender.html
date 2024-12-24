@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management Calendar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nepali-date@2.0.4/dist/nepali-date.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
+    <style>
+        .nepali-date {
+            font-size: 0.85em;
+            color: #6c757d;
+        }
+        .fc-daygrid-day {
+            position: relative;
+        }
+        .add-icon {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Event Management Calendar</h2>
+    <div class="d-flex justify-content-center mb-3">
+        <select id="monthSelect" class="form-select me-2" style="width: auto;">
+            <!-- Month options dynamically populated -->
+        </select>
+        <select id="yearSelect" class="form-select" style="width: auto;">
+            <!-- Year options dynamically populated -->
+        </select>
+    </div>
+    <div id="calendar"></div>
+</div>
+
+<!-- Add Event Modal -->
+<div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEventModalLabel">Add Event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm">
+                    <div class="mb-3">
+                        <label for="eventTitle" class="form-label">Event Title</label>
+                        <input type="text" class="form-control" id="eventTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventDate" class="form-label">Event Date</label>
+                        <input type="text" class="form-control" id="eventDate" disabled>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEvent">Save Event</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        const calendarEl = document.getElementById('calendar');
+        const events = [];
+
+        function populateMonthYearSelectors() {
+            const monthSelect = $('#monthSelect');
+            const yearSelect = $('#yearSelect');
+
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            months.forEach((month, index) => {
+                monthSelect.append(`<option value="${index}">${month}</option>`);
+            });
+
+            const currentYear = new Date().getFullYear();
+            for (let year = currentYear - 50; year <= currentYear + 50; year++) {
+                yearSelect.append(`<option value="${year}">${year}</option>`);
+            }
+
+            monthSelect.val(new Date().getMonth());
+            yearSelect.val(currentYear);
+        }
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: false,
+            dateClick: function (info) {
+                const nepaliDate = new NepaliDate(new Date(info.dateStr)).format('YYYY-MM-DD');
+                $('#eventDate').val(`${info.dateStr} / ${nepaliDate}`);
+                $('#addEventModal').modal('show');
+            },
+            events: events,
+            dayCellDidMount: function (info) {
+                const addIcon = document.createElement('span');
+                addIcon.classList.add('add-icon');
+                addIcon.innerHTML = '➕';
+                addIcon.addEventListener('click', function () {
+                    const nepaliDate = new NepaliDate(new Date(info.date)).format('YYYY-MM-DD');
+                    $('#eventDate').val(`${info.dateStr} / ${nepaliDate}`);
+                    $('#addEventModal').modal('show');
+                });
+
+                info.el.appendChild(addIcon);
+            },
+            eventContent: function (arg) {
+                const content = document.createElement('div');
+                content.innerHTML = `${arg.event.title} <span class="text-danger delete-event" style="cursor: pointer;">&times;</span>`;
+                $(content).find('.delete-event').on('click', function () {
+                    arg.event.remove();
+                });
+                return { domNodes: [content] };
+            }
+        });
+
+        calendar.render();
+
+        populateMonthYearSelectors();
+
+        $('#monthSelect, #yearSelect').on('change', function () {
+            const year = $('#yearSelect').val();
+            const month = $('#monthSelect').val();
+            calendar.gotoDate(new Date(year, month, 1));
+        });
+
+        $('#saveEvent').on('click', function () {
+            const title = $('#eventTitle').val();
+            const date = $('#eventDate').val().split(' / ')[0];
+
+            if (title) {
+                events.push({ title: title, start: date });
+                calendar.addEvent({ title: title, start: date });
+                $('#addEventModal').modal('hide');
+            }
+        });
+    });
+</script>
+</body>
+</html>
