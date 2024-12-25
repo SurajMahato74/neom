@@ -3,84 +3,122 @@
   <title>
    Ontex
   </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
-  /* Navbar link styles */
-.navbar-nav .nav-link {
-    color: #333; /* Dark color for better readability */
-    font-weight: 700; /* Make links bold */
-    font-size: 1rem; /* Set a consistent font size */
-    transition: color 0.3s ease, font-size 0.3s ease; /* Smooth hover and size transitions */
-}
+    /* Navbar link styles */
+  .navbar-nav .nav-link {
+      color: #333; /* Dark color for better readability */
+      font-weight: 700; /* Make links bold */
+      font-size: 1rem; /* Set a consistent font size */
+      transition: color 0.3s ease, font-size 0.3s ease; /* Smooth hover and size transitions */
+  }
+  
+  /* Hover effect for navbar links */
+  .navbar-nav .nav-link:hover {
+      color: orange; /* Slightly darker blue for hover state */
+  }
+  
+  /* Navbar brand logo styling */
+  .navbar-brand img {
+      height: 60px; /* Default logo height */
+      transition: height 0.3s ease; /* Smooth resizing on interactions */
+  }
+  
+  /* Contact button styling */
+  .contact-btn {
+      border: 1px solid #0056b3; /* Update to darker blue for better contrast */
+      border-radius: 10px; /* Slightly rounder corners */
+      padding: 2px 20px; /* Balanced look */
+      font-weight: 600; /* Make text bold */
+      color: #0056b3; /* Match border color */
+      background-color: transparent; /* Transparent background */
+      transition: all 0.3s ease; /* Smooth transitions for hover effects */
+  }
+  
+  /* Hover effect for contact button */
+  .contact-btn:hover {
+      background-color: #0056b3; /* Darker blue background */
+      color: #fff; /* White text for contrast */
+      border-color: #0056b3; /* Match border with background */
+  }
+  
+  /* Navbar fixed at the top */
+  .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1030; /* Ensure navbar appears above other elements */
+      transition: all 0.3s ease; /* Smooth transition for height and background changes */
+  }
+  
+  /* Initial navbar state */
+  .navbar-expanded {
+      height: 70px; /* Default height */
+      background-color: #f8f9fa; /* Light background */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  /* Shrinked navbar state on scroll */
+  .navbar-shrink {
+      height: 50px; /* Smaller height */
+      background-color: #ffffff; /* White background */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Stronger shadow for focus */
+  }
+  
+  .navbar-shrink .navbar-brand img {
+      height: 30px; /* Reduce logo height */
+      width: 30px;
+  }
+  
+  .navbar-shrink .nav-link {
+      font-size: 0.9rem; /* Slightly smaller font size */
+  }
+  
+  .full-screen-image {
+      height: 100vh;
+      width: 100%; /* Optional, ensures it spans the full width */
+      object-fit: cover; /* Optional, adjusts the image to fit nicely */
+  }
+  
+    </style>
+  
+<style>
+    .scroll-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+    }
+    
+    .scroll-to-top:hover {
+        background-color: #0056b3;
+    }
+    
+    .scroll-to-top.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    .nav-item{
+        position: relative;
+    }
+    
+    </style>
 
-/* Hover effect for navbar links */
-.navbar-nav .nav-link:hover {
-    color: orange; /* Slightly darker blue for hover state */
-}
-
-/* Navbar brand logo styling */
-.navbar-brand img {
-    height: 40px; /* Default logo height */
-    transition: height 0.3s ease; /* Smooth resizing on interactions */
-}
-
-/* Contact button styling */
-.contact-btn {
-    border: 1px solid #0056b3; /* Update to darker blue for better contrast */
-    border-radius: 10px; /* Slightly rounder corners */
-    padding: 2px 20px; /* Balanced look */
-    font-weight: 600; /* Make text bold */
-    color: #0056b3; /* Match border color */
-    background-color: transparent; /* Transparent background */
-    transition: all 0.3s ease; /* Smooth transitions for hover effects */
-}
-
-/* Hover effect for contact button */
-.contact-btn:hover {
-    background-color: #0056b3; /* Darker blue background */
-    color: #fff; /* White text for contrast */
-    border-color: #0056b3; /* Match border with background */
-}
-
-/* Navbar fixed at the top */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1030; /* Ensure navbar appears above other elements */
-    transition: all 0.3s ease; /* Smooth transition for height and background changes */
-}
-
-/* Initial navbar state */
-.navbar-expanded {
-    height: 70px; /* Default height */
-    background-color: #f8f9fa; /* Light background */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
-
-/* Shrinked navbar state on scroll */
-.navbar-shrink {
-    height: 50px; /* Smaller height */
-    background-color: #ffffff; /* White background */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Stronger shadow for focus */
-}
-
-.navbar-shrink .navbar-brand img {
-    height: 30px; /* Reduce logo height */
-}
-
-.navbar-shrink .nav-link {
-    font-size: 0.9rem; /* Slightly smaller font size */
-}
-
-.full-screen-image {
-    height: 100vh;
-    width: 100%; /* Optional, ensures it spans the full width */
-    object-fit: cover; /* Optional, adjusts the image to fit nicely */
-}
-
-  </style>
 
 <style>
  
@@ -348,98 +386,113 @@
 
  </head>
  <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-     <img alt="Ontex logo" height="40" src="https://storage.googleapis.com/a1aa/image/KFiWL7zkr3aTBNIAgTCOXznNIbSehyL0wfZKfxnI59xbLbwnA.jpg" width="100"/>
-    </a>
-    <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
-     <span class="navbar-toggler-icon">
-     </span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item dropdown">
-       <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="companyDropdown" role="button">
-        Company
-       </a>
-       <ul aria-labelledby="companyDropdown" class="dropdown-menu">
-        <li>
-         <a class="dropdown-item" href="#">
-          About Us
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+         <a class="navbar-brand" href="#">
+          <img alt="Ontex logo" src="image/lo.png" width="100"/>
          </a>
-        </li>
-        <li>
-         <a class="dropdown-item" href="#">
-          Our Team
-         </a>
-        </li>
-        <li>
-         <a class="dropdown-item" href="#">
-          Careers
-         </a>
-        </li>
-       </ul>
-      </li>
-      <li class="nav-item dropdown">
-       <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="productsDropdown" role="button">
-        Products &amp; Services
-       </a>
-       <ul aria-labelledby="productsDropdown" class="dropdown-menu">
-        <li>
-         <a class="dropdown-item" href="#">
-          Product 1
-         </a>
-        </li>
-        <li>
-         <a class="dropdown-item" href="#">
-          Product 2
-         </a>
-        </li>
-        <li>
-         <a class="dropdown-item" href="#">
-          Service 1
-         </a>
-        </li>
-       </ul>
-      </li>
-      <li class="nav-item dropdown">
-       <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="sustainabilityDropdown" role="button">
-        Sustainability
-       </a>
-       <ul aria-labelledby="sustainabilityDropdown" class="dropdown-menu">
-        <li>
-         <a class="dropdown-item" href="#">
-          Initiative 1
-         </a>
-        </li>
-        <li>
-         <a class="dropdown-item" href="#">
-          Initiative 2
-         </a>
-        </li>
-       </ul>
-      </li>
+         <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+          <span class="navbar-toggler-icon">
+          </span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
      
-     </ul>
-     <ul class="navbar-nav mb-2 mb-lg-0">
-    
-      
      
-      <li class="nav-item">
-       <a class="nav-link contact-btn" href="#">
-        Contact
-       </a>
-      </li>
+             <li class="nav-item ">
+                 <a aria-expanded="false" class="nav-link "  href="index.html" id="companyDropdown" role="button">
+                 Home
+                 </a>
+                
+                </li>
      
-    
-     </ul>
-    </div>
-   </div>
-  </nav>
-
-
- 
+     
+     
+           <li class="nav-item ">
+            <a aria-expanded="false" class="nav-link "  href="aboutus.html" id="companyDropdown" role="button">
+             About Us
+            </a>
+           
+           </li>
+           <li class="nav-item dropdown">
+            <a aria-expanded="false" class="nav-link "  href="productdetail.html" id="productsDropdown" role="button">
+            Our Products 
+            </a>
+          
+           </li>
+     
+     
+           <li class="nav-item dropdown">
+             <a aria-expanded="false" class="nav-link "  href="distributor.html" id="productsDropdown" role="button">
+                 Distributor
+             </a>
+           
+            </li>
+     
+     
+     
+           <li class="nav-item dropdown">
+            <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="sustainabilityDropdown" role="button">
+             Sustainability
+            </a>
+            <ul aria-labelledby="sustainabilityDropdown" class="dropdown-menu">
+             <li>
+              <a class="dropdown-item" href="suns.html">
+               Overview
+              </a>
+             </li>
+            
+           
+            </ul>
+           </li>
+          
+          </ul>
+          <ul class="navbar-nav mb-2 mb-lg-0" style="text-align: center; ">
+         
+           <li class="nav-item" style="margin-right: 15px;"> 
+             <a href="carrers.html">
+                 Carrers
+             </a>
+           </li>
+           <li class="nav-item" style="margin-right: 15px;">
+             <a href="notice.html">
+                 Notice
+             </a>
+           </li>
+           <li class="nav-item" href="contactus.html" style="margin-right: 15px;">
+             <a>
+                 Contact
+             </a>
+           </li>
+          
+           <li class="nav-item">
+             <a class="nav-link contact-btn" href="payoutform.html" 
+                 style="
+                     font-size: 0.9rem; 
+                     font-style: normal; 
+                     background-color: #007BFF; /* Blue background */
+                     color: #ffffff; /* White text color */
+                     padding: 4px 14px; /* Padding for spacing */
+                     border-radius: 8px; /* Rounded corners */
+                     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Shadow effect */
+                     text-align: center; 
+                     display: inline-flex; 
+                     align-items: center; 
+                     text-decoration: none;
+                 ">
+                 <!-- Icon using Font Awesome -->
+                 <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i>
+                 Order Now
+             </a>
+         </li>
+         
+          
+         
+          </ul>
+         </div>
+        </div>
+       </nav>
+     
   <style>
               
     .image-container {
@@ -491,7 +544,7 @@
 
 <div class="container-fluid image-container">
     <img 
-        src="about.png" 
+        src="image/about.png" 
         alt="A child holding a shopping basket with groceries in a store" 
     >
     <div class="image-overlay">
@@ -508,7 +561,32 @@
     </div>
 </div>
 
-   
+   <style>
+    @media (max-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .img-fluid {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px; /* Adjusted for smaller screens */
+  }
+}
+
+   </style>
    
   <div class="container content">
     <div class="row align-items-center">
@@ -532,33 +610,12 @@
     </div>
     
     </div>
-    <div class="text-center">
-     <a class="btn btn-custom" href="#">
-      Discover our products and services
-      <i class="fas fa-arrow-right">
-      </i>
-     </a>
-    </div>
+   
    </div>
 
 
 
-   <div class="innovation-section">
-    <h1>Innovation</h1>
-    <div class="row">
-        <div class="col-md-8">
-            <p>Innovation is one of the key strategic pillars at Ontex. We develop and deliver the right product and packaging innovation at the right time, inspired by customer and consumer needs, with <a href="#" style="color: #007bff;">sustainability</a> in mind.</p>
-            <p>New products are created from rigorous research into market trends, customer and consumer insights, the skills of our engineers and, not least, the creativity of our people.</p>
-            <p>We also collaborate with partner organizations including leading universities, laboratories, institutes, start-ups and research organizations to make sure that we are at the forefront of change.</p>
-        </div>
-        <div class="col-md-4">
-            <div class="video-container">
-                <iframe width="100%" height="215" src="https://www.youtube.com/embed/VIDEO_ID" title="Innovation at Ontex" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-    <a href="#" class="btn btn-outline-primary">Our innovation approach <i class="fas fa-arrow-right"></i></a>
-</div>
+ 
 
 
 <div class="container content">
@@ -575,23 +632,110 @@
       </p>
      </div>
      <div class="col-md-4 image-container">
-      <img alt="Signboard with the text 'Welcome to Ontex' in a garden setting" class="img-fluid" height="300" src="https://storage.googleapis.com/a1aa/image/Ou3lp78El8JtCBTYmEjPei9KtR3r0yrVGMRNLBQH1AeS4J5TA.jpg" width="400"/>
+      <img alt="Signboard with the text 'Welcome to Ontex' in a garden setting" class="img-fluid" height="300" src="image/NEON-BOARD.webp" width="400"/>
      </div>
     </div>
-    <div class="row">
-     <div class="col-12 text-center">
-      <button class="btn btn-primary btn-custom">
-       Company profile and strategy
-       <i class="fas fa-arrow-right">
-       </i>
-      </button>
-     </div>
-    </div>
+    
    </div>
 
 
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="intro-section d-flex align-items-center">
+                <img 
+                    alt="Modern office buildings with glass facades" 
+                    class="img-fluid" 
+                    src="image/path-final.webp" 
+                    style="flex: 1; max-width: 50%; height: auto; border-radius: 5px;"
+                />
+                <div class="description" style="flex: 1; padding-left: 20px;">
+                    
+                    <h1>Pathivara World Trade &amp; Leadership</h1>
+                    <p>Right from the beginning, Ontex has been driven by an entrepreneurial spirit – the desire to challenge the status quo and make a real difference.</p>
+                    <p>You need motivated and visionary leaders to turn ideas into success, to drive a company forward to the next level of success. Our leadership teams are doing just that.</p>
+               
+                    <div class="col-12 text-center">
+                        <button class="btn btn-primary btn-custom">
+                         Company profile and strategy
+                         <i class="fas fa-arrow-right">
+                         </i>
+                        </button>
+                       </div>
+                </div>
 
-   <div class="container text-center mt-5">
+                
+                   
+                   
+
+            </div>
+           
+        </div>
+       
+    </div>
+
+    <div class="row main-content">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Investor Relations</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">Leadership</li>
+                </ol>
+            </nav>
+            <h2><span class="highlight">Meet</span> our Board and the Executive Management Committee</h2>
+            <div class="executive-management">
+              
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 mb-4 text-center">
+                        <img 
+                            alt="Executive member 1" 
+                            class="img-fluid rounded" 
+                            src="image/yubraj.jpg"
+                        />
+                        <h5>Yubraj Dhakal</h5>
+                        <p>CEO</p>
+                        <p>Email: <a href="mailto:yuvraj@gmail.com">yuvraj@gmail.com</a></p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4 text-center">
+                        <img 
+                            alt="Executive member 2" 
+                            class="img-fluid rounded" 
+                            src="image/mam.jpg"
+                        />
+                        <h5>Neesha Dhakal</h5>
+                        <p>CFO</p>
+                        <p>Email: <a href="mailto:neesha@example.com">neesha@example.com</a></p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4 text-center">
+                        <img 
+                            alt="Executive member 3" 
+                            class="img-fluid rounded" 
+                            src="https://storage.googleapis.com/a1aa/image/Wog8PDp5rVYfcqVvfvAhMyRt3FL3NkKfw8nfdWCDMPr8RpkPB.jpg"
+                        />
+                        <h5>Chamesh Dhakal</h5>
+                        <p>COO</p>
+                        <p>Email: <a href="mailto:chamesh.dhakal@example.com">chamesh.dhakal@example.com</a></p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4 text-center">
+                        <img 
+                            alt="Executive member 4" 
+                            class="img-fluid rounded" 
+                            src="https://storage.googleapis.com/a1aa/image/A8OVk5UsX4IRPpYgf98fnDzkbf7CeRHqw1k0q997hGQqRpkPB.jpg"
+                        />
+                        <h5>Salina Dhakal</h5>
+                        <p>CTO</p>
+                        <p>Email: <a href="mailto:salina.dhakal@example.com">salina.dhakal@example.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container text-center mt-5">
     <h2>Our values</h2>
     <p>Onex has five values. These company values guide us when we work to realize our company goals and our vision.</p>
     <div class="row justify-content-center">
@@ -623,86 +767,7 @@
             <p>Let's do it together. We succeed as one TEAM ONEX. We act with unity and inclusion, embrace DIVERSITY and truly CARE for each other. <a href="#">Read more about our diversity, equity and inclusion approach.</a></p>
         </div>
     </div>
-    <button class="btn btn-custom mt-4">Discover our products and services</button>
-</div>
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="intro-section d-flex align-items-center">
-                <img 
-                    alt="Modern office buildings with glass facades" 
-                    class="img-fluid" 
-                    src="https://storage.googleapis.com/a1aa/image/5UCmAzIjjmI9PF787s4iJv93ux9xhxPRcYejMqsc7z6OKl8JA.jpg" 
-                    style="flex: 1; max-width: 50%; height: auto; border-radius: 5px;"
-                />
-                <div class="description" style="flex: 1; padding-left: 20px;">
-                    <h1>Leadership &amp; Corporate Governance</h1>
-                    <p>Right from the beginning, Ontex has been driven by an entrepreneurial spirit – the desire to challenge the status quo and make a real difference.</p>
-                    <p>You need motivated and visionary leaders to turn ideas into success, to drive a company forward to the next level of success. Our leadership teams are doing just that.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row main-content">
-        <div class="col-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Investor Relations</a></li>
-                    <li aria-current="page" class="breadcrumb-item active">Leadership</li>
-                </ol>
-            </nav>
-            <h2><span class="highlight">Meet</span> our Board and the Executive Management Committee</h2>
-            <div class="executive-management">
-                <h3>EXECUTIVE MANAGEMENT COMMITTEE</h3>
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 mb-4 text-center">
-                        <img 
-                            alt="Executive member 1" 
-                            class="img-fluid rounded" 
-                            src="https://storage.googleapis.com/a1aa/image/ERe4AnetbUu2hUG6O2ytXfsDpPzWbKXCpEU2Q1B5iLy2oUynA.jpg"
-                        />
-                        <h5>John Doe</h5>
-                        <p>CEO</p>
-                        <p>Email: <a href="mailto:john.doe@example.com">john.doe@example.com</a></p>
-                    </div>
-                    <div class="col-md-3 col-sm-6 mb-4 text-center">
-                        <img 
-                            alt="Executive member 2" 
-                            class="img-fluid rounded" 
-                            src="https://storage.googleapis.com/a1aa/image/0OI7UI4veN2UPiYUeyA3GWg5exm1u0Lds732gCyMGS85oUynA.jpg"
-                        />
-                        <h5>Jane Smith</h5>
-                        <p>CFO</p>
-                        <p>Email: <a href="mailto:jane.smith@example.com">jane.smith@example.com</a></p>
-                    </div>
-                    <div class="col-md-3 col-sm-6 mb-4 text-center">
-                        <img 
-                            alt="Executive member 3" 
-                            class="img-fluid rounded" 
-                            src="https://storage.googleapis.com/a1aa/image/Wog8PDp5rVYfcqVvfvAhMyRt3FL3NkKfw8nfdWCDMPr8RpkPB.jpg"
-                        />
-                        <h5>Michael Brown</h5>
-                        <p>COO</p>
-                        <p>Email: <a href="mailto:michael.brown@example.com">michael.brown@example.com</a></p>
-                    </div>
-                    <div class="col-md-3 col-sm-6 mb-4 text-center">
-                        <img 
-                            alt="Executive member 4" 
-                            class="img-fluid rounded" 
-                            src="https://storage.googleapis.com/a1aa/image/A8OVk5UsX4IRPpYgf98fnDzkbf7CeRHqw1k0q997hGQqRpkPB.jpg"
-                        />
-                        <h5>Susan Green</h5>
-                        <p>CTO</p>
-                        <p>Email: <a href="mailto:susan.green@example.com">susan.green@example.com</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <button class="btn btn-custom mt-4" style="margin-bottom: 20px;">Discover our products and services</button>
 </div>
 
 
