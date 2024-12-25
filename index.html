@@ -405,7 +405,7 @@
 
 
         <li class="nav-item ">
-            <a aria-expanded="false" class="nav-link "  href="#" id="companyDropdown" role="button">
+            <a aria-expanded="false" class="nav-link "  href="index.html" id="companyDropdown" role="button">
             Home
             </a>
            
@@ -414,13 +414,13 @@
 
 
       <li class="nav-item ">
-       <a aria-expanded="false" class="nav-link "  href="#" id="companyDropdown" role="button">
+       <a aria-expanded="false" class="nav-link "  href="aboutus.html" id="companyDropdown" role="button">
         About Us
        </a>
       
       </li>
       <li class="nav-item dropdown">
-       <a aria-expanded="false" class="nav-link "  href="#" id="productsDropdown" role="button">
+       <a aria-expanded="false" class="nav-link "  href="productdetail.html" id="productsDropdown" role="button">
        Our Products 
        </a>
      
@@ -428,7 +428,7 @@
 
 
       <li class="nav-item dropdown">
-        <a aria-expanded="false" class="nav-link "  href="#" id="productsDropdown" role="button">
+        <a aria-expanded="false" class="nav-link "  href="distributor.html" id="productsDropdown" role="button">
             Distributor
         </a>
       
@@ -442,15 +442,11 @@
        </a>
        <ul aria-labelledby="sustainabilityDropdown" class="dropdown-menu">
         <li>
-         <a class="dropdown-item" href="#">
+         <a class="dropdown-item" href="suns.html">
           Overview
          </a>
         </li>
-        <li>
-            <a class="dropdown-item" href="#">
-             Our Activities
-            </a>
-           </li>
+       
       
        </ul>
       </li>
@@ -459,23 +455,23 @@
      <ul class="navbar-nav mb-2 mb-lg-0" style="text-align: center; ">
     
       <li class="nav-item" style="margin-right: 15px;"> 
-        <a>
+        <a href="carrers.html">
             Carrers
         </a>
       </li>
       <li class="nav-item" style="margin-right: 15px;">
-        <a>
+        <a href="notice.html">
             Notice
         </a>
       </li>
-      <li class="nav-item" style="margin-right: 15px;">
+      <li class="nav-item" href="contactus.html" style="margin-right: 15px;">
         <a>
             Contact
         </a>
       </li>
      
       <li class="nav-item">
-        <a class="nav-link contact-btn" href="#" 
+        <a class="nav-link contact-btn" href="payoutform.html" 
             style="
                 font-size: 0.9rem; 
                 font-style: normal; 
@@ -714,28 +710,412 @@
 
     <!-- Right Content -->
     <div class="intro-right-content">
-      <div class="f1">
-        <div class="intro-stat-item">
-            <div class="intro-stat">100+</div>
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="intro-stat" data-target="100">0</div>
             <div class="intro-stat-description">Neom Products</div>
           </div>
-          <div class="intro-stat-item">
-            <div class="intro-stat">7+</div>
+          <div class="stat-item">
+            <div class="intro-stat" data-target="7">0</div>
             <div class="intro-stat-description">Neom Distributors</div>
           </div>
-      </div>
-      <div class="f1">
-        <div class="intro-stat-item">
-            <div class="intro-stat">2 years+</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="intro-stat" data-target="2">0</div>
             <div class="intro-stat-description">Our Experience</div>
           </div>
-          <div class="intro-stat-item">
-            <div class="intro-stat">4+</div>
+          <div class="stat-item">
+            <div class="intro-stat" data-target="4">0</div>
             <div class="intro-stat-description">Partner Brands</div>
           </div>
-      </div>
+        </div>
     </div>
+    
   </div>
+
+
+  <script>
+    // Function to animate the number from 0 to the target number
+function animateNumber(element) {
+  const target = +element.getAttribute('data-target'); // Get the target number from the data attribute
+  let currentValue = 0; // Start from 0
+
+  const increment = target / 100; // Increment value for each frame
+
+  function update() {
+    currentValue += increment;
+    if (currentValue >= target) {
+      currentValue = target;
+    }
+
+    element.innerText = Math.floor(currentValue); // Update the text content
+
+    if (currentValue < target) {
+      requestAnimationFrame(update); // Continue the animation
+    }
+  }
+
+  update(); // Start the animation
+}
+
+// Intersection Observer to trigger the animation when elements come into view
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const statElement = entry.target;
+      animateNumber(statElement); // Animate the number when it's in the viewport
+      observer.unobserve(statElement); // Stop observing after animation starts
+    }
+  });
+}, {
+  threshold: 0.5 // Trigger the animation when 50% of the element is visible
+});
+
+// Observe each .intro-stat element
+document.querySelectorAll('.intro-stat').forEach(statElement => {
+  observer.observe(statElement);
+});
+
+    </script>
+
+  <style>
+    /* Styling for the intro-right-content */
+.intro-right-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  border-radius: 16px;
+  align-items: center;
+}
+
+/* Styling for each row of statistics */
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+/* Styling for individual statistic items */
+.stat-item {
+  text-align: center;
+  width: 45%; /* Set width to create two items per row */
+}
+
+.intro-stat {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.intro-stat-description {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+  </style>
+
+
+
+
+<div class="container">
+    <h1 class="main-heading" >Our Product</h1>
+    <div class="section row align-items-center" >
+     <div class="col-md-6">
+      <img alt="Baby diaper and pants" height="200" src="https://storage.googleapis.com/a1aa/image/cZL7r9x8m14rFB3uaAfH9JewtpTVophQYgHykr11I84fSw0nA.jpg" width="300"/>
+     </div>
+     <div class="col-md-6">
+      <h2>
+       Baby Care Products
+      </h2>
+      <p>
+       Right from the very start, babies need the freedom to explore the new world around them in freedom and comfort. The absorption and lock-away properties of our diapers, pants and night pants, gives them just the start they need. Ontex’s continuous innovation helps ensure a great start for parents and children.
+      </p>
+      <div class="bt-flex">
+        <a class="btn-custom" href="#" style="text-decoration: none;">
+            See Product Detail
+            <i class="fas fa-arrow-right">
+            </i>
+           </a>
+     
+           <a class="btn-custom" href="#" style=" text-decoration: none;">
+             Order Now
+             <i class="fas fa-arrow-right">
+             </i>
+            </a>
+      </div>
+
+
+     </div>
+    </div>
+ </div>
+
+ <style>
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        max-width: 1200px;
+        gap: 20px;
+       
+    }
+    .bt-flex{
+        display: flex;
+        flex-direction: row;
+    }
+    .btn-custom{
+        margin-right: 20px; 
+    }
+    .main-heading{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .section{
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+    .star-rating {
+        color: #ff6f61;
+    }
+    .learn-more-btn {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .learn-more-btn:hover {
+        background-color: #555;
+    }
+    @media(max-width:760px){
+        .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        gap: 20px;
+       
+    }
+    .bt-flex{
+        display: flex;
+        flex-direction: column;
+    }
+    .bt-flex a{
+        text-align: center;
+    }
+        .section{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .main-heading{
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+    .col-md-6 h2{
+        margin-top: 20px;
+    }
+    }
+    </style>
+    
+
+    <div class="container mt-5">
+        <h1 class="main-heading" style="text-align: center; margin-bottom: 10px;">
+            Explore Our Partner Brands
+        </h1>
+        
+        
+    <div class="row">
+    <div class="col-md-6">
+    <div class="star-rating mb-3">
+    <i class="fas fa-star">
+    </i>
+    <i class="fas fa-star">
+    </i>
+    <i class="fas fa-star">
+    </i>
+    <i class="fas fa-star">
+    </i>
+    <i class="fas fa-star">
+    </i>
+    </div>
+    <h2>
+    Helen Helper
+    </h2>
+    <p>
+    Premium Helen Helper baby pants take use of top brand materials as Sandia SAP from Japan and Weyerhaeuser fluff pulp from USA. We are not only committed to providing a comfortable diapers for your baby, but more importantly, represents the attitude toward the responsibility in the improvement of babies' safety and all aspects of care.
+    </p>
+    <button class="learn-more-btn">
+    LEARN MORE
+    </button>
+    </div>
+    <div class="col-md-6 text-center">
+    <div class="d-flex flex-wrap justify-content-center align-items-center">
+    
+    <div class="p-2 p-2-1">
+    <img alt="Helen Helper Baby Pants Packaging" class="img-fluid" src="https://storage.googleapis.com/a1aa/image/by6bRS9hQJq3Fdj416q6rTpcNu2g8OZRgQIRedEKGGBzWb9JA.jpg" />
+    </div>
+    
+    
+    <div class="p-2 p-2-3">
+    <img alt="Helen Helper Baby Pants Packaging" class="img-fluid" src="https://storage.googleapis.com/a1aa/image/by6bRS9hQJq3Fdj416q6rTpcNu2g8OZRgQIRedEKGGBzWb9JA.jpg" />
+    </div>
+    <div class="p-2 p-2-3">
+    <img alt="Baby wearing Helen Helper Baby Pants" class="img-fluid"  src="https://storage.googleapis.com/a1aa/image/j8IzIIVZfESJFaa6BTFESG9oWHtWzs6awQtBU6NnT0Y0Wb9JA.jpg"/>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+
+
+
+
+    <style>
+        .p-2-1{
+            height:100px;
+            width: 100px;
+        }
+        .p-2-2{
+            height:200px;
+            width:200px
+        }
+        .p-2-3{
+            height:200px;
+            width: 200px;
+        }
+  
+        .left-section {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+        .left-section img {
+            width: 100%;
+            height: auto;
+        }
+        .left-section .overlay-text {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            transform: translate(-10%, -20%);
+            color: white;
+            text-align: left;
+        }
+        .left-section .overlay-text h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .left-section .overlay-text p {
+            font-size: 1.5rem;
+        }
+        .right-section {
+            padding: 50px;
+        }
+        .right-section h2 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .right-section p {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        .right-section .btn {
+            background-color: #343a40;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+        .right-section .btn:hover {
+            background-color: #495057;
+        }
+        .rating {
+            color: #ff6f61;
+        }
+        .messenger-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+    @media(max-width:760px){
+        .learn-more-btn{
+            margin-bottom: 20px;
+        }
+        .p-2-1{
+            height:auto;
+            width: 50%;
+        }
+        .p-2-2{
+            height:auto;
+            width: 50%;
+        }
+        .p-2-3{
+            height:auto;
+            width: 50%;
+        }
+        .right-section {
+            padding:2vw;
+        }
+    }
+
+</style>
+<div class="container-fluid" style=" margin-top: 50px;">
+    <div class="row">
+     <div class="col-md-4 left-section">
+      <img alt="A child sitting on the floor with two packs of aiwibi diapers in the background" height="200" src="https://storage.googleapis.com/a1aa/image/PylXvhaelM1MGSXudofts2BOVuCHZ5ED5QMfPicy9dQalt1nA.jpg" width="200"/>
+      <div class="overlay-text">
+       <h1>
+        Ultra Thin
+        <br/>
+        Breathable
+       </h1>
+       <p>
+        Premium Baby Diapers
+       </p>
+      </div>
+     </div>
+     <div class="col-md-6 right-section">
+      <div class="rating">
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+      </div>
+      <h2>
+       The Baby Charm
+      </h2>
+      <p>
+       Super soft aiwibi baby diapers, with breathable topsheet &amp; backsheet, Sandia SAP from Japan, weyerhaeuser fluff pulp from USA, have strong absorption capacity to keep baby skin always dry.
+      </p>
+      <button class="btn">
+       LEARN MORE
+      </button>
+     </div>
+    </div>
+   </div>
+   <div class="messenger-icon">
+    <img alt="Messenger icon" height="50" src="https://storage.googleapis.com/a1aa/image/bv2IyJzLfw0uB6EaOhMcGvbNXdfmjvDKnWoHdLWFPppuy26TA.jpg" width="50"/>
+   </div>
+</div>
+
+
+
+
   <div class="container-abc" style="background-color: white;">
     <div class="row">
         <!-- Best Selling Section -->
@@ -1127,297 +1507,8 @@
     }
     }
 </style>
-<div class="container">
-    <h1 class="main-heading" >Our Product</h1>
-    <div class="section row align-items-center" >
-     <div class="col-md-6">
-      <img alt="Baby diaper and pants" height="200" src="https://storage.googleapis.com/a1aa/image/cZL7r9x8m14rFB3uaAfH9JewtpTVophQYgHykr11I84fSw0nA.jpg" width="300"/>
-     </div>
-     <div class="col-md-6">
-      <h2>
-       Baby Care Products
-      </h2>
-      <p>
-       Right from the very start, babies need the freedom to explore the new world around them in freedom and comfort. The absorption and lock-away properties of our diapers, pants and night pants, gives them just the start they need. Ontex’s continuous innovation helps ensure a great start for parents and children.
-      </p>
-      <div class="bt-flex">
-        <a class="btn-custom" href="#" style="text-decoration: none;">
-            See Product Detail
-            <i class="fas fa-arrow-right">
-            </i>
-           </a>
-     
-           <a class="btn-custom" href="#" style=" text-decoration: none;">
-             Order Now
-             <i class="fas fa-arrow-right">
-             </i>
-            </a>
-      </div>
 
 
-     </div>
-    </div>
- </div>
-
- <style>
-    .container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 90%;
-        max-width: 1200px;
-        gap: 20px;
-       
-    }
-    .bt-flex{
-        display: flex;
-        flex-direction: row;
-    }
-    .btn-custom{
-        margin-right: 20px; 
-    }
-    .main-heading{
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .section{
-        margin-top: 30px;
-        margin-bottom: 20px;
-    }
-    .star-rating {
-        color: #ff6f61;
-    }
-    .learn-more-btn {
-        background-color: #333;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-    .learn-more-btn:hover {
-        background-color: #555;
-    }
-    @media(max-width:760px){
-        .container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: 1200px;
-        gap: 20px;
-       
-    }
-    .bt-flex{
-        display: flex;
-        flex-direction: column;
-    }
-    .bt-flex a{
-        text-align: center;
-    }
-        .section{
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    .main-heading{
-        margin-top: 10px;
-        margin-bottom: 0px;
-    }
-    .col-md-6 h2{
-        margin-top: 20px;
-    }
-    }
-    </style>
-    
-
-    <div class="container mt-5">
-        <h1 class="main-heading" style="text-align: center; margin-bottom: 10px;">
-            Explore Our Partner Brands
-        </h1>
-        
-        
-    <div class="row">
-    <div class="col-md-6">
-    <div class="star-rating mb-3">
-    <i class="fas fa-star">
-    </i>
-    <i class="fas fa-star">
-    </i>
-    <i class="fas fa-star">
-    </i>
-    <i class="fas fa-star">
-    </i>
-    <i class="fas fa-star">
-    </i>
-    </div>
-    <h2>
-    Helen Helper
-    </h2>
-    <p>
-    Premium Helen Helper baby pants take use of top brand materials as Sandia SAP from Japan and Weyerhaeuser fluff pulp from USA. We are not only committed to providing a comfortable diapers for your baby, but more importantly, represents the attitude toward the responsibility in the improvement of babies' safety and all aspects of care.
-    </p>
-    <button class="learn-more-btn">
-    LEARN MORE
-    </button>
-    </div>
-    <div class="col-md-6 text-center">
-    <div class="d-flex flex-wrap justify-content-center align-items-center">
-    
-    <div class="p-2 p-2-1">
-    <img alt="Helen Helper Baby Pants Packaging" class="img-fluid" src="https://storage.googleapis.com/a1aa/image/by6bRS9hQJq3Fdj416q6rTpcNu2g8OZRgQIRedEKGGBzWb9JA.jpg" />
-    </div>
-    
-    
-    <div class="p-2 p-2-3">
-    <img alt="Helen Helper Baby Pants Packaging" class="img-fluid" src="https://storage.googleapis.com/a1aa/image/by6bRS9hQJq3Fdj416q6rTpcNu2g8OZRgQIRedEKGGBzWb9JA.jpg" />
-    </div>
-    <div class="p-2 p-2-3">
-    <img alt="Baby wearing Helen Helper Baby Pants" class="img-fluid"  src="https://storage.googleapis.com/a1aa/image/j8IzIIVZfESJFaa6BTFESG9oWHtWzs6awQtBU6NnT0Y0Wb9JA.jpg"/>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    
-
-
-
-
-    <style>
-        .p-2-1{
-            height:100px;
-            width: 100px;
-        }
-        .p-2-2{
-            height:200px;
-            width:200px
-        }
-        .p-2-3{
-            height:200px;
-            width: 200px;
-        }
-  
-        .left-section {
-            position: relative;
-            text-align: center;
-            color: white;
-        }
-        .left-section img {
-            width: 100%;
-            height: auto;
-        }
-        .left-section .overlay-text {
-            position: absolute;
-            top: 20%;
-            left: 10%;
-            transform: translate(-10%, -20%);
-            color: white;
-            text-align: left;
-        }
-        .left-section .overlay-text h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
-        .left-section .overlay-text p {
-            font-size: 1.5rem;
-        }
-        .right-section {
-            padding: 50px;
-        }
-        .right-section h2 {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        .right-section p {
-            font-size: 1rem;
-            color: #6c757d;
-        }
-        .right-section .btn {
-            background-color: #343a40;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-        }
-        .right-section .btn:hover {
-            background-color: #495057;
-        }
-        .rating {
-            color: #ff6f61;
-        }
-        .messenger-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-        }
-    @media(max-width:760px){
-        .learn-more-btn{
-            margin-bottom: 20px;
-        }
-        .p-2-1{
-            height:auto;
-            width: 50%;
-        }
-        .p-2-2{
-            height:auto;
-            width: 50%;
-        }
-        .p-2-3{
-            height:auto;
-            width: 50%;
-        }
-        .right-section {
-            padding:2vw;
-        }
-    }
-
-</style>
-<div class="container-fluid" style=" margin-top: 50px;">
-    <div class="row">
-     <div class="col-md-4 left-section">
-      <img alt="A child sitting on the floor with two packs of aiwibi diapers in the background" height="200" src="https://storage.googleapis.com/a1aa/image/PylXvhaelM1MGSXudofts2BOVuCHZ5ED5QMfPicy9dQalt1nA.jpg" width="200"/>
-      <div class="overlay-text">
-       <h1>
-        Ultra Thin
-        <br/>
-        Breathable
-       </h1>
-       <p>
-        Premium Baby Diapers
-       </p>
-      </div>
-     </div>
-     <div class="col-md-6 right-section">
-      <div class="rating">
-       <i class="fas fa-star">
-       </i>
-       <i class="fas fa-star">
-       </i>
-       <i class="fas fa-star">
-       </i>
-       <i class="fas fa-star">
-       </i>
-       <i class="fas fa-star">
-       </i>
-      </div>
-      <h2>
-       The Baby Charm
-      </h2>
-      <p>
-       Super soft aiwibi baby diapers, with breathable topsheet &amp; backsheet, Sandia SAP from Japan, weyerhaeuser fluff pulp from USA, have strong absorption capacity to keep baby skin always dry.
-      </p>
-      <button class="btn">
-       LEARN MORE
-      </button>
-     </div>
-    </div>
-   </div>
-   <div class="messenger-icon">
-    <img alt="Messenger icon" height="50" src="https://storage.googleapis.com/a1aa/image/bv2IyJzLfw0uB6EaOhMcGvbNXdfmjvDKnWoHdLWFPppuy26TA.jpg" width="50"/>
-   </div>
-</div>
 
 
 <div class="container" style="margin-top: 50px;">
